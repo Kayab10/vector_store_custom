@@ -1,0 +1,68 @@
+this is a scratch implementation of vector store, to understand how they work 
+
+THE THOERY
+
+A vector store (or vector database) is a special kind of database designed to store and manage vector embeddings—numerical representations of data like
+ text, images, or audio—so that they can be efficiently searched, compared, or retrieved using similarity measures (like cosine similarity).
+
+🗃️ What is a Vector Store?
+ A vector store is a system that:
+
+  Stores vectors (usually high-dimensional, like 384D, 768D, 1536D)
+
+  Indexes them efficiently using data structures like HNSW or FAISS
+
+  Allows similarity search (e.g., find the most similar documents/images to a query vector)
+
+  Often stores metadata (like IDs, timestamps, text chunks, etc.) alongside each vector
+
+  Because normal databases can't do fast similarity search in high dimensions. If you try to compare millions of vectors one by one, it's too slow.
+
+🛠️ Popular Vector Stores
+  FAISS (by Facebook) – local, fast, open-source
+
+  Pinecone – cloud-native vector DB
+
+  Weaviate – open-source with hybrid search (text + vector)
+
+  Chroma – popular with LangChain
+
+  Milvus – scalable and open-source
+
+  Qdrant – Rust-based vector DB with strong performance
+
+STEPS
+
+1. uses python
+2. data structures that is in-memory structure (for better efficiency)
+ An "in-memory data structure" refers to a data structure stored directly in a computer's RAM (Random Access Memory) rather than on disk, offering faster access and processing speeds 
+3. storage format; making custom datastructure using array list
+4. indexing; use hash maps, trees 
+5. update vector; add delete etc
+6. memory management
+7. serialization and persistance; 
+  Serialization is the process of converting data into a storable format (like binary or JSON)
+  so it can be saved to disk or transferred over a network.
+
+  Persistence means that the data in the vector store survives after the program stops
+
+IMPLEMENTATION of vector store class
+
+the vector store consist of two dictionary to store the data i.e. vector_data and vector_index
+ indexing is used when we wish to retreive data
+ one more thing i realised that vector ids are given by us or an complex algorithm is run on them to provide them ids
+
+1. add_vector method
+    it adds the vector to the the vector store
+    and also update its index 
+2. update_index 
+    it uses a loop to collect two items of vector data dict that is id and vector stored in it
+    then it find cosine similarity between the input vector and existing vector(loop vector)
+    and basically stores a adjacency list of similarity of loop vector to that input vector
+    self.vector_index[existing_id][vector_id] = similarity; this code just store the similarity of existingid with vector id
+3. get_vector 
+     it just simply get the vector given index
+4. find_similar_vectors
+    Find similar vectors to the query vector using brute-force search.
+
+IMPLEMENTATION of app
