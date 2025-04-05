@@ -65,4 +65,4 @@ the vector store consist of two dictionary to store the data i.e. vector_data an
 4. find_similar_vectors
     Find similar vectors to the query vector using brute-force search.
 
-IMPLEMENTATION of app
+
